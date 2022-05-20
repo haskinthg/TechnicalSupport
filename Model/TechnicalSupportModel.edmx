@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище TechnicalSupportDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerId" />
+          </Key>
+          <Property Name="AnswerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ADate" Type="date" Nullable="false" />
+          <Property Name="CText" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="HandlingId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CFirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CSecondName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CLastName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CPhone" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="DLevel" Type="nvarchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EFirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ESecondName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ELastName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="EPhone" Type="bigint" />
+          <Property Name="EPassword" Type="nvarchar" MaxLength="20" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Handling">
+          <Key>
+            <PropertyRef Name="HandlingId" />
+          </Key>
+          <Property Name="HandlingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HDate" Type="date" Nullable="false" />
+          <Property Name="CText" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Answer__Handling__4316F928">
+          <End Role="Handling" Type="Self.Handling" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Handling">
+              <PropertyRef Name="HandlingId" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="HandlingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Depart__3A81B327">
+          <End Role="Department" Type="Self.Department" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Handling__Client__403A8C7D">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Handling" Type="Self.Handling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Handling">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Handling__Employ__3F466844">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Handling" Type="Self.Handling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Handling">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TechnicalSupportDBModelContainer">
+          <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Handling" EntityType="Self.Handling" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Answer__Handling__4316F928" Association="Self.FK__Answer__Handling__4316F928">
+            <End Role="Handling" EntitySet="Handling" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Depart__3A81B327" Association="Self.FK__Employee__Depart__3A81B327">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Handling__Client__403A8C7D" Association="Self.FK__Handling__Client__403A8C7D">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Handling" EntitySet="Handling" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Handling__Employ__3F466844" Association="Self.FK__Handling__Employ__3F466844">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Handling" EntitySet="Handling" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TechnicalSupportDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerId" />
+          </Key>
+          <Property Name="AnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ADate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HandlingId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Handling" Relationship="Self.FK__Answer__Handling__4316F928" FromRole="Answer" ToRole="Handling" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CSecondName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CPhone" Type="Int64" />
+          <NavigationProperty Name="Handlings" Relationship="Self.FK__Handling__Client__403A8C7D" FromRole="Client" ToRole="Handling" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DLevel" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__Depart__3A81B327" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ESecondName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ELastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EPhone" Type="Int64" />
+          <Property Name="EPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Employee__Depart__3A81B327" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Handlings" Relationship="Self.FK__Handling__Employ__3F466844" FromRole="Employee" ToRole="Handling" />
+        </EntityType>
+        <EntityType Name="Handling">
+          <Key>
+            <PropertyRef Name="HandlingId" />
+          </Key>
+          <Property Name="HandlingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK__Answer__Handling__4316F928" FromRole="Handling" ToRole="Answer" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Handling__Client__403A8C7D" FromRole="Handling" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Handling__Employ__3F466844" FromRole="Handling" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK__Answer__Handling__4316F928">
+          <End Role="Handling" Type="Self.Handling" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Handling">
+              <PropertyRef Name="HandlingId" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="HandlingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Handling__Client__403A8C7D">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Handling" Type="Self.Handling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Handling">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__Depart__3A81B327">
+          <End Role="Department" Type="Self.Department" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Handling__Employ__3F466844">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Handling" Type="Self.Handling" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Handling">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TechnicalSupportDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Answers" EntityType="Self.Answer" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Handlings" EntityType="Self.Handling" />
+          <AssociationSet Name="FK__Answer__Handling__4316F928" Association="Self.FK__Answer__Handling__4316F928">
+            <End Role="Handling" EntitySet="Handlings" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Handling__Client__403A8C7D" Association="Self.FK__Handling__Client__403A8C7D">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Handling" EntitySet="Handlings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__Depart__3A81B327" Association="Self.FK__Employee__Depart__3A81B327">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Handling__Employ__3F466844" Association="Self.FK__Handling__Employ__3F466844">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Handling" EntitySet="Handlings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TechnicalSupportDBModelContainer" CdmEntityContainer="TechnicalSupportDBEntities">
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="TechnicalSupportDBModel.Answer">
+              <MappingFragment StoreEntitySet="Answer">
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="ADate" ColumnName="ADate" />
+                <ScalarProperty Name="CText" ColumnName="CText" />
+                <ScalarProperty Name="HandlingId" ColumnName="HandlingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="TechnicalSupportDBModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="CFirstName" ColumnName="CFirstName" />
+                <ScalarProperty Name="CSecondName" ColumnName="CSecondName" />
+                <ScalarProperty Name="CLastName" ColumnName="CLastName" />
+                <ScalarProperty Name="CPhone" ColumnName="CPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="TechnicalSupportDBModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DName" ColumnName="DName" />
+                <ScalarProperty Name="DLevel" ColumnName="DLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="TechnicalSupportDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EFirstName" ColumnName="EFirstName" />
+                <ScalarProperty Name="ESecondName" ColumnName="ESecondName" />
+                <ScalarProperty Name="ELastName" ColumnName="ELastName" />
+                <ScalarProperty Name="EPhone" ColumnName="EPhone" />
+                <ScalarProperty Name="EPassword" ColumnName="EPassword" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Handlings">
+            <EntityTypeMapping TypeName="TechnicalSupportDBModel.Handling">
+              <MappingFragment StoreEntitySet="Handling">
+                <ScalarProperty Name="HandlingId" ColumnName="HandlingId" />
+                <ScalarProperty Name="HDate" ColumnName="HDate" />
+                <ScalarProperty Name="CText" ColumnName="CText" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
