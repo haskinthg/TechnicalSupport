@@ -20,12 +20,13 @@ namespace TechnicalSupport
     /// </summary>
     public partial class CommonWindow : Window
     {
-        public CommonWindow()
+        public CommonWindow(Employee emp)
         {
             InitializeComponent();
             Refresh();
+            this.emp = emp;
         }
-
+        Employee emp;
         TechnicalSupportDBEntities db = new TechnicalSupportDBEntities();
         private void DeleteClientClick(object sender, RoutedEventArgs e)
         {
@@ -43,7 +44,9 @@ namespace TechnicalSupport
 
         private void ClientClick(object sender, RoutedEventArgs e)
         {
-
+            var w = new HandlingWindow(ClientData.SelectedItem as Client,emp);
+            w.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            w.Show();
         }
 
         private void AddClient(object sender, RoutedEventArgs e)

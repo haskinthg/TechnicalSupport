@@ -24,9 +24,10 @@ namespace TechnicalSupport.Model
             return db.Clients.ToList();
         }
 
-        static public List<Answer> GetAllAnswers(TechnicalSupportDBEntities db)
+        static public List<Answer> GetAllAnswers(TechnicalSupportDBEntities db, int id)
         {
-            return db.Answers.ToList();
+            SqlParameter Id = new SqlParameter("@id",id);
+            return db.Answers.SqlQuery("select * from Answer where HandlingId = @id",Id).ToList();
         }
 
         static public List<Department> GetAllDepartments(TechnicalSupportDBEntities db)
@@ -34,9 +35,11 @@ namespace TechnicalSupport.Model
             return db.Departments.ToList();
         }
 
-        static public List<Handling> GetAllHandlings(TechnicalSupportDBEntities db)
+        static public List<Handling> GetAllHandlings(TechnicalSupportDBEntities db,int cid,int eid)
         {
-            return db.Handlings.ToList();
+            SqlParameter Cid = new SqlParameter("@cid",cid);
+            SqlParameter Eid = new SqlParameter("@eid",eid);
+            return db.Handlings.SqlQuery("select * from handling where clientid = @cid and employeeid = @eid",Cid,Eid).ToList();
         }
 
         static public List<Employee> GetAllEmployees(TechnicalSupportDBEntities db)
@@ -129,6 +132,13 @@ namespace TechnicalSupport.Model
         {
             var emp = db.Employees.Find(old.EmployeeId);
             emp = n;
+            db.SaveChanges();
+        }
+
+        static public void ChangeHandling(TechnicalSupportDBEntities db, Handling old, Handling n)
+        {
+            var h = db.Handlings.Find(old.HandlingId);
+            h = n;
             db.SaveChanges();
         }
     }

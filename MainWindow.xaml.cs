@@ -61,7 +61,7 @@ namespace TechnicalSupport
                     {
                         if (Data.FindEmployee(db, int.Parse(idin.Text)).Department.DLevel.Equals("Y"))
                         {
-                            var a = new AdminWindow();
+                            var a = new AdminWindow(Data.FindEmployee(db, int.Parse(idin.Text)));
                             a.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                             a.Show();
                             a.Owner = this;
@@ -69,7 +69,7 @@ namespace TechnicalSupport
                         }
                         if (Data.FindEmployee(db, int.Parse(idin.Text)).Department.DLevel.Equals("N"))
                         {
-                            var a = new CommonWindow();
+                            var a = new CommonWindow(Data.FindEmployee(db, int.Parse(idin.Text)));
                             a.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                             a.Show();
                             a.Owner = this;

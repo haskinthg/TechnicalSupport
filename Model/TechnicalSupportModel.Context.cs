@@ -18,6 +18,7 @@ namespace TechnicalSupport.Model
         public TechnicalSupportDBEntities()
             : base("name=TechnicalSupportDBEntities")
         {
+            Database.CreateIfNotExists();
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

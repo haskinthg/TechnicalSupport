@@ -20,12 +20,13 @@ namespace TechnicalSupport
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow()
+        public AdminWindow(Employee emp)
         {
             InitializeComponent();
             Refresh();
+            this.emp = emp;
         }
-
+        Employee emp;
         TechnicalSupportDBEntities db = new TechnicalSupportDBEntities();
 
         private void Refresh()
@@ -67,7 +68,9 @@ namespace TechnicalSupport
 
         private void ClientClick(object sender, RoutedEventArgs e)
         {
-
+            var w = new HandlingWindow(ClientData.SelectedItem as Client, emp);
+            w.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            w.Show();
         }
 
         private void AddClient(object sender, RoutedEventArgs e)
