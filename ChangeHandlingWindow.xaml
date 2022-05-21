@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TechnicalSupport"
         mc:Ignorable="d"
-        Title="ChangeHandlingWindow" Height="220" Width="280">
+        Title="Изменение обращения" Height="220" Width="280" ResizeMode="NoResize">
     <Grid>
-        <GroupBox Header="Изменение обращения" Margin="5">
+        <GroupBox Header="Информация об обращении" Margin="5">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>

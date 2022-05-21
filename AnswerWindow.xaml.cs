@@ -31,7 +31,7 @@ namespace TechnicalSupport
         private void Refresh()
         {
             AnswerData.Items.Clear();
-            foreach (var i in Data.GetAllAnswers(db, handling.ClientId))
+            foreach (var i in Data.GetAllAnswers(db, handling.HandlingId))
                 AnswerData.Items.Add(i);
         }
 
@@ -43,10 +43,10 @@ namespace TechnicalSupport
         }
         private void ChangeClick(object sender, RoutedEventArgs e)
         {
-            //var w = new ChangeAnswerWindow(AnswerData.SelectedItem as Answer);
-            //w.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            //w.Show();
-            //w.Closed += Closed;
+            var w = new ChangeAnswerWindow(AnswerData.SelectedItem as Answer);
+            w.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            w.Show();
+            w.Closed += Closed;
         }
         private void Closed(object sender, EventArgs e)
         {
@@ -55,10 +55,10 @@ namespace TechnicalSupport
 
         private void AddAnswer(object sender, RoutedEventArgs e)
         {
-            //var w = new AddAnswer(handling);
-            //w.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            //w.Show();
-            //w.Closed += Closed;
+            var w = new AddAnswerWindow(handling);
+            w.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            w.Show();
+            w.Closed += Closed;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace TechnicalSupport
         {
             db.Departments.Load();
             InitializeComponent();
-            this.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             foreach (ComboBoxItem item in combobox.Items)
                 Data.AddDepartment(db, new Department { DLevel = item.Tag.ToString(), DName = item.Content.ToString() });
         }
@@ -47,7 +47,6 @@ namespace TechnicalSupport
             firstname.Text = "";
             secondname.Text = "";
             lastname.Text = "";
-            password.Text = "";
             phone.Text = "";
         }
 

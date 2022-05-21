@@ -6,13 +6,6 @@ namespace TechnicalSupport.Model
 {
     static class Data
     {
-        static public int AnswerId;
-        static public int ClientId;
-        static public int DepartmentId;
-        static public int EmployeeId;
-        static public int HandlingId;
-
-
         static public string LogIn(TechnicalSupportDBEntities db, int id)
         {
             SqlParameter Id = new SqlParameter("@id", id);
@@ -26,8 +19,8 @@ namespace TechnicalSupport.Model
 
         static public List<Answer> GetAllAnswers(TechnicalSupportDBEntities db, int id)
         {
-            SqlParameter Id = new SqlParameter("@id",id);
-            return db.Answers.SqlQuery("select * from Answer where HandlingId = @id",Id).ToList();
+            SqlParameter Id = new SqlParameter("@id", id);
+            return db.Answers.SqlQuery("select * from Answer where HandlingId = @id", Id).ToList();
         }
 
         static public List<Department> GetAllDepartments(TechnicalSupportDBEntities db)
@@ -35,11 +28,11 @@ namespace TechnicalSupport.Model
             return db.Departments.ToList();
         }
 
-        static public List<Handling> GetAllHandlings(TechnicalSupportDBEntities db,int cid,int eid)
+        static public List<Handling> GetAllHandlings(TechnicalSupportDBEntities db, int cid, int eid)
         {
-            SqlParameter Cid = new SqlParameter("@cid",cid);
-            SqlParameter Eid = new SqlParameter("@eid",eid);
-            return db.Handlings.SqlQuery("select * from handling where clientid = @cid and employeeid = @eid",Cid,Eid).ToList();
+            SqlParameter Cid = new SqlParameter("@cid", cid);
+            SqlParameter Eid = new SqlParameter("@eid", eid);
+            return db.Handlings.SqlQuery("select * from handling where clientid = @cid and employeeid = @eid", Cid, Eid).ToList();
         }
 
         static public List<Employee> GetAllEmployees(TechnicalSupportDBEntities db)
@@ -124,21 +117,37 @@ namespace TechnicalSupport.Model
         static public void ChangeClient(TechnicalSupportDBEntities db, Client old, Client n)
         {
             var client = db.Clients.Find(old.ClientId);
-            client = n;
+            client.CPhone = n.CPhone;
+            client.CFirstName = n.CFirstName;
+            client.CLastName = n.CLastName;
+            client.CSecondName = n.CSecondName;
             db.SaveChanges();
         }
 
         static public void ChangeEmployee(TechnicalSupportDBEntities db, Employee old, Employee n)
         {
             var emp = db.Employees.Find(old.EmployeeId);
-            emp = n;
+            emp.EPhone = n.EPhone;
+            emp.ELastName = n.ELastName;
+            emp.EFirstName = n.EFirstName;
+            emp.ESecondName = n.ESecondName;
+            emp.EPassword = n.EPassword;
             db.SaveChanges();
         }
 
         static public void ChangeHandling(TechnicalSupportDBEntities db, Handling old, Handling n)
         {
-            var h = db.Handlings.Find(old.HandlingId);
-            h = n;
+            var handling = db.Handlings.Find(old.HandlingId);
+            handling.HDate = n.HDate;
+            handling.CText = n.CText;
+            db.SaveChanges();
+        }
+
+        static public void ChangeAnswer(TechnicalSupportDBEntities db, Answer old, Answer a)
+        {
+            var answer = db.Answers.Find(old.AnswerId);
+            answer.ADate = a.ADate;
+            answer.CText = a.CText;
             db.SaveChanges();
         }
     }
