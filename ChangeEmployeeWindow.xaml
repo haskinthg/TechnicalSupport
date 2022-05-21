@@ -47,7 +47,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Width="60">Телефон</TextBlock>
-                    <TextBox Name="phone" Margin="5,0,0,0" Grid.Column="1"/>
+                    <TextBox PreviewTextInput="NumberValidationTextBox" Name="phone" Margin="5,0,0,0" Grid.Column="1"/>
                 </Grid>
                 <Grid Margin="5" Grid.Row="4">
                     <Grid.ColumnDefinitions>

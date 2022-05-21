@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using TechnicalSupport.Model;
 
 namespace TechnicalSupport
@@ -79,15 +81,19 @@ namespace TechnicalSupport
                             a.Closed += A_Closed;
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show("Неправильный логин или пароль");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Неправильный логин или пароль");
+                    MessageBox.Show("Введите логин или пароль");
                 }
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Неправильный логин или пароль");
+                MessageBox.Show("Ошибка");
             }
             passwordin.Clear();
             idin.Clear();
@@ -96,6 +102,11 @@ namespace TechnicalSupport
         private void A_Closed(object sender, EventArgs e)
         {
             this.Activate();
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

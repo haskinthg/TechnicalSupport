@@ -43,7 +43,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Width="90">Телефон</TextBlock>
-                    <TextBox Name="phone" Margin="20,0,0,0" Grid.Column="1"/>
+                    <TextBox PreviewTextInput="NumberValidationTextBox" Name="phone" Margin="20,0,0,0" Grid.Column="1"/>
                 </Grid>
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
@@ -75,7 +75,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Width="140" Height="Auto">Логин (ID Сотрудника)</TextBlock>
-                    <TextBox Name="idin" Margin="20,0,0,0" Grid.Column="1"/>
+                    <TextBox PreviewTextInput="NumberValidationTextBox" Name="idin" Margin="20,0,0,0" Grid.Column="1"/>
                 </Grid>
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>

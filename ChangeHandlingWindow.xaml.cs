@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Input;
 using TechnicalSupport.Model;
 
 namespace TechnicalSupport
@@ -24,6 +26,11 @@ namespace TechnicalSupport
             if(date.SelectedDate!=null) handling.HDate = date.SelectedDate.Value.Date;
             Data.ChangeHandling(db,old,handling);
             this.Close();
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Input;
 using TechnicalSupport.Model;
 
 namespace TechnicalSupport
@@ -32,6 +34,11 @@ namespace TechnicalSupport
                 this.Close();
             }
             else MessageBox.Show("Введите данные");
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
