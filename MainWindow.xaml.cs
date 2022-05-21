@@ -24,30 +24,34 @@ namespace TechnicalSupport
 
         private void AddEmployeeClick(object sender, RoutedEventArgs e)
         {
-            var emp = new Employee
+            if (firstname.Text != "" && secondname.Text != "" && lastname.Text != "" && password.Text != "")
             {
-                EFirstName = firstname.Text,
-                ESecondName = secondname.Text,
-                ELastName = lastname.Text,
-                EPassword = password.Text,
-                DepartmentId = Data.FindDepartment(db, ((ComboBoxItem)combobox.SelectedItem).Content.ToString(),
-                    ((ComboBoxItem)combobox.SelectedItem).Tag.ToString()).DepartmentId
-            };
-            if (phone.Text != "")
-            {
-                emp.EPhone = long.Parse(phone.Text);
-                Data.AddEmployee(db, emp);
+                var emp = new Employee
+                {
+                    EFirstName = firstname.Text,
+                    ESecondName = secondname.Text,
+                    ELastName = lastname.Text,
+                    EPassword = password.Text,
+                    DepartmentId = Data.FindDepartment(db, ((ComboBoxItem)combobox.SelectedItem).Content.ToString(),
+                        ((ComboBoxItem)combobox.SelectedItem).Tag.ToString()).DepartmentId
+                };
+                if (phone.Text != "")
+                {
+                    emp.EPhone = long.Parse(phone.Text);
+                    Data.AddEmployee(db, emp);
+                }
+                else
+                {
+                    Data.AddEmployee(db, emp);
+                }
+                MessageBox.Show($" Логин(ID) сотрудника: {emp.EmployeeId} \n" +
+                    $" Пароль: {emp.EPassword}");
+                firstname.Text = "";
+                secondname.Text = "";
+                lastname.Text = "";
+                phone.Text = "";
             }
-            else
-            {
-                Data.AddEmployee(db, emp);
-            }
-            MessageBox.Show($" Логин(ID) сотрудника: {emp.EmployeeId} \n" +
-                $" Пароль: {emp.EPassword}");
-            firstname.Text = "";
-            secondname.Text = "";
-            lastname.Text = "";
-            phone.Text = "";
+            else MessageBox.Show("Введите данные");
         }
 
         private void InClick(object sender, RoutedEventArgs e)

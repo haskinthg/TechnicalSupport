@@ -20,7 +20,7 @@ namespace TechnicalSupport
         Answer old;
         private void ChangeClick(object sender, RoutedEventArgs e)
         {
-            if (new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text != "") answer.CText = new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text;
+            if (new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text != "\r\n") answer.CText = new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text;
             if (date.SelectedDate != null) answer.ADate = date.SelectedDate.Value.Date;
             Data.ChangeAnswer(db, old, answer);
             this.Close();

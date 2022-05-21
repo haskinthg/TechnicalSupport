@@ -18,13 +18,17 @@ namespace TechnicalSupport
         Handling handing;
         private void AddClick(object sender, RoutedEventArgs e)
         {
-            Data.AddAnswer(db, new Answer
+            if (new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text != "\r\n" && date.SelectedDate != null)
             {
-                HandlingId = handing.HandlingId,
-                CText = new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text,
-                ADate = date.SelectedDate.Value.Date
-            }); ;
-            this.Close();
+                Data.AddAnswer(db, new Answer
+                {
+                    HandlingId = handing.HandlingId,
+                    CText = new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text,
+                    ADate = date.SelectedDate.Value.Date
+                }); ;
+                this.Close();
+            }
+            else MessageBox.Show("Введите данные");
         }
     }
 }

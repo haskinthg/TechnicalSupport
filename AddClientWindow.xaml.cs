@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using TechnicalSupport.Model;
 
 namespace TechnicalSupport
@@ -28,26 +16,30 @@ namespace TechnicalSupport
 
         private void AddClick(object sender, RoutedEventArgs e)
         {
-            if (phone.Text != "")
+            if (firstname.Text != "" && secondname.Text != "" && lastname.Text != "")
             {
-                Data.AddClient(db, new Client
+                if (phone.Text != "")
                 {
-                    CFirstName = firstname.Text,
-                    CLastName = lastname.Text,
-                    CPhone = long.Parse(phone.Text),
-                    CSecondName = secondname.Text
-                });
-            }
-            else
-            {
-                Data.AddClient(db, new Client
+                    Data.AddClient(db, new Client
+                    {
+                        CFirstName = firstname.Text,
+                        CLastName = lastname.Text,
+                        CPhone = long.Parse(phone.Text),
+                        CSecondName = secondname.Text
+                    });
+                }
+                else
                 {
-                    CFirstName = firstname.Text,
-                    CLastName = lastname.Text,
-                    CSecondName = secondname.Text
-                });
+                    Data.AddClient(db, new Client
+                    {
+                        CFirstName = firstname.Text,
+                        CLastName = lastname.Text,
+                        CSecondName = secondname.Text
+                    });
+                }
+                this.Close();
             }
-            this.Close();
+            else MessageBox.Show("Введите данные");
         }
     }
 }

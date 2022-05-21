@@ -20,7 +20,7 @@ namespace TechnicalSupport
         Handling handling;
         private void ChangeClick(object sender, RoutedEventArgs e)
         {
-            if (new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text != "") handling.CText = new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text;
+            if (new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text != "\r\n") handling.CText = new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text;
             if(date.SelectedDate!=null) handling.HDate = date.SelectedDate.Value.Date;
             Data.ChangeHandling(db,old,handling);
             this.Close();

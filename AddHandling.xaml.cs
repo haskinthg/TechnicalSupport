@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
+﻿using System.Windows;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TechnicalSupport.Model;
 
 namespace TechnicalSupport
@@ -20,7 +9,7 @@ namespace TechnicalSupport
     /// </summary>
     public partial class AddHandling : Window
     {
-        public AddHandling(Client client,Employee emp)
+        public AddHandling(Client client, Employee emp)
         {
             InitializeComponent();
             this.client = client;
@@ -31,14 +20,18 @@ namespace TechnicalSupport
         TechnicalSupportDBEntities db = new TechnicalSupportDBEntities();
         private void AddClick(object sender, RoutedEventArgs e)
         {
-            Data.AddHandling(db, new Handling
+            if (new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text != "\r\n" && date.SelectedDate != null)
             {
-                HDate = date.SelectedDate.Value.Date,
-                CText = new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text,
-                ClientId= client.ClientId,
-                EmployeeId = emp.EmployeeId
-            });
-            this.Close();
+                Data.AddHandling(db, new Handling
+                {
+                    HDate = date.SelectedDate.Value.Date,
+                    CText = new TextRange(text.Document.ContentStart, text.Document.ContentEnd).Text,
+                    ClientId = client.ClientId,
+                    EmployeeId = emp.EmployeeId
+                });
+                this.Close();
+            }
+            else MessageBox.Show("Введите данные");
         }
     }
 }
