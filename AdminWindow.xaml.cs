@@ -57,7 +57,14 @@ namespace TechnicalSupport
             var w = new CommonWindow(EmpData.SelectedItem as Employee);
             w.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             w.Show();
+            w.Closed += W_Closed;
         }
+
+        private void W_Closed(object sender, EventArgs e)
+        {
+            Refresh();
+        }
+
         private void DeleteClientClick(object sender, RoutedEventArgs e)
         {
             if(ClientData.SelectedItem != null)
