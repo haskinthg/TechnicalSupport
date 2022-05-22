@@ -132,6 +132,7 @@ namespace TechnicalSupport.Model
             emp.EFirstName = n.EFirstName;
             emp.ESecondName = n.ESecondName;
             emp.EPassword = n.EPassword;
+            emp.DepartmentId = n.DepartmentId;
             db.SaveChanges();
         }
 

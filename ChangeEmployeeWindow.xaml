@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TechnicalSupport"
         mc:Ignorable="d"
-        Title="Изменение" Height="250" Width="250" ResizeMode="NoResize">
+        Title="Изменение" Height="280" Width="250" ResizeMode="NoResize">
     <Grid>
         <GroupBox Header="Информация о сотруднике" Margin="5">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -54,10 +55,19 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Width="60">Отдел</TextBlock>
+                    <ComboBox  Name="department" Margin="5,0,0,0" Grid.Column="1"/>
+                    
+                </Grid>
+                <Grid Margin="5" Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Width="60">Пароль</TextBlock>
                     <TextBox Name="password" Margin="5,0,0,0" Grid.Column="1"/>
                 </Grid>
-                <Button Width="80" Margin="10" Grid.Row="5" Click="ChangeClick">Изменить</Button>
+                <Button Width="80" Margin="10" Grid.Row="6" Click="ChangeClick">Изменить</Button>
             </Grid>
         </GroupBox>
     </Grid>
