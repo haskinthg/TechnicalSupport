@@ -133,6 +133,7 @@ namespace TechnicalSupport.Model
             emp.ESecondName = n.ESecondName;
             emp.EPassword = n.EPassword;
             emp.DepartmentId = n.DepartmentId;
+            db.Entry(emp).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
         }
 

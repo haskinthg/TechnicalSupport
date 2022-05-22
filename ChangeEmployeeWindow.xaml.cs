@@ -41,7 +41,10 @@ namespace TechnicalSupport
             if (secondname.Text != "") emp.ESecondName = secondname.Text;
             if (phone.Text != "") emp.EPhone = long.Parse(phone.Text);
             if (password.Text != "") emp.EPassword = password.Text;
-            if (department.SelectedIndex!=-1) emp.DepartmentId = (department.SelectedItem as Department).DepartmentId;
+            if (department.SelectedIndex != -1)
+            {
+                emp.DepartmentId = (department.SelectedItem as Department).DepartmentId;
+            }
             Data.ChangeEmployee(db, old, emp);
             this.Close();
         }
