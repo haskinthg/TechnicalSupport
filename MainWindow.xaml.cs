@@ -15,7 +15,6 @@ namespace TechnicalSupport
     {
         public MainWindow()
         {
-            db.Departments.Load();
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             foreach (ComboBoxItem item in combobox.Items)
