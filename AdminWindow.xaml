@@ -57,7 +57,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Отдел" Binding="{Binding Department.DName}">
+                    <DataGridTextColumn Width="120" Header="Отдел" Binding="{Binding Department.DName}">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap"></Setter>
@@ -67,14 +67,23 @@
                     <DataGridTemplateColumn Width="70" Header="Удалить">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Удалить" Background="Red" Click="DeleteEmpClick"/>
+                                <Button Content="Удалить"  Click="DeleteEmpClick"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Изменить" Width="70">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Изменить"  Background="Yellow" Click="ChangeEmpClick"/>
+                                <Button Content="Изменить"  Click="ChangeEmpClick"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Открыть" Width="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Открыть"  Click="OpenEmpClick" >
+                                   
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

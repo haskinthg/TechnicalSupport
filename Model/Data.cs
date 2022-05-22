@@ -64,6 +64,10 @@ namespace TechnicalSupport.Model
         }
         static public Employee FindEmployee(TechnicalSupportDBEntities db, int id)
         {
+            foreach (var entity in db.ChangeTracker.Entries())
+            {
+                entity.Reload();
+            }
             return db.Employees.First(x => x.EmployeeId == id);
         }
 
