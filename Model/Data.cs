@@ -8,6 +8,10 @@ namespace TechnicalSupport.Model
     {
         static public string LogIn(TechnicalSupportDBEntities db, int id)
         {
+            foreach (var entity in db.ChangeTracker.Entries())
+            {
+                entity.Reload();
+            }
             SqlParameter Id = new SqlParameter("@id", id);
             return db.Database.SqlQuery<string>("select epassword from employee where employeeid = @id", Id).Single();
         }
@@ -19,6 +23,10 @@ namespace TechnicalSupport.Model
 
         static public List<Answer> GetAllAnswers(TechnicalSupportDBEntities db, int id)
         {
+            foreach (var entity in db.ChangeTracker.Entries())
+            {
+                entity.Reload();
+            }
             SqlParameter Id = new SqlParameter("@id", id);
             return db.Answers.SqlQuery("select * from Answer where HandlingId = @id", Id).ToList();
         }
@@ -30,6 +38,10 @@ namespace TechnicalSupport.Model
 
         static public List<Handling> GetAllHandlings(TechnicalSupportDBEntities db, int cid, int eid)
         {
+            foreach (var entity in db.ChangeTracker.Entries())
+            {
+                entity.Reload();
+            }
             SqlParameter Cid = new SqlParameter("@cid", cid);
             SqlParameter Eid = new SqlParameter("@eid", eid);
             return db.Handlings.SqlQuery("select * from handling where clientid = @cid and employeeid = @eid", Cid, Eid).ToList();
@@ -94,8 +106,15 @@ namespace TechnicalSupport.Model
 
         static public void AddAnswer(TechnicalSupportDBEntities db, Answer a)
         {
-            db.Answers.Add(a);
-            db.SaveChanges();
+            try
+            {
+                db.Answers.Add(a);
+                db.SaveChanges();
+            }
+            catch(System.Exception ex)
+            {
+                System.Windows.MessageBox.Show("Дата ответа должна быть в день обращения или позже");
+            }
         }
         static public void AddClient(TechnicalSupportDBEntities db, Client a)
         {

@@ -52,6 +52,7 @@
           <Property Name="HDate" Type="date" Nullable="false" />
           <Property Name="CText" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="HProcessed" Type="bit" Nullable="false" />
           <Property Name="ClientId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__Answer__Handling__4316F928">
@@ -190,6 +191,7 @@
           <Property Name="HDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="CText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="HProcessed" Type="Boolean" Nullable="false" />
           <Property Name="ClientId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Answers" Relationship="Self.FK__Answer__Handling__4316F928" FromRole="Handling" ToRole="Answer" />
           <NavigationProperty Name="Client" Relationship="Self.FK__Handling__Client__403A8C7D" FromRole="Handling" ToRole="Client" />
@@ -330,6 +332,7 @@
                 <ScalarProperty Name="HDate" ColumnName="HDate" />
                 <ScalarProperty Name="CText" ColumnName="CText" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="HProcessed" ColumnName="HProcessed" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
               </MappingFragment>
             </EntityTypeMapping>

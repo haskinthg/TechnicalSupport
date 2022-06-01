@@ -24,6 +24,7 @@ namespace TechnicalSupport.Model
         public System.DateTime HDate { get; set; }
         public string CText { get; set; }
         public int EmployeeId { get; set; }
+        public bool HProcessed { get; set; }
         public int ClientId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
